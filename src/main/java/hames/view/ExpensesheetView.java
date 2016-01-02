@@ -9,6 +9,7 @@ import hames.bean.Expense;
 import hames.core.bean.ModelUtil;
 import hames.core.view.AbstractView;
 import hames.dbo.ExpenseDbo;
+import hames.service.ServicebillService;
 
 @Controller
 public class ExpensesheetView extends AbstractView{
@@ -22,10 +23,15 @@ public class ExpensesheetView extends AbstractView{
 	public String ExpenseSheet(Model model){
 		
 		
+		activeMenu(model, "expensesheet");
+		ServicebillService ser=new ServicebillService();
+		String date=ser.getToday();
+		model.addAttribute("date", date);
 		return "expensesheet";
 	}
 	@RequestMapping("/saveexpense")
 	public String Expensesave(@ModelAttribute("SpringWeb")Expense expense,Model model){
+		
 		ExpenseDbo db=new ExpenseDbo();
 		db.insertNewExpense(expense);
 		ModelUtil.addSuccess("success..");

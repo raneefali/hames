@@ -6,11 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<style>
+<style type="text/css" >
+
 	#div_form{
 		margin-left: 30px;
 		margin-right: 50px;
-		background: #76D6E3;
+		background: #ffffff;
 		padding-left: 20px;
 		border-radius: 8px;
 		padding-top: 20px;
@@ -26,24 +27,32 @@
 	#div_form label{
 		margin-right: 20px;
 	}
-	#et_expense,#div_heads input{
-		border: 1px solid activeborder;
-		border-radius:5px;
+	#et_expense,#div_form input{
+		border: 1px solid #CCC;
+		border-radius:4px;
 		float: inherit;
-		padding-left: 3px;
-		min-height: 30px;
+		padding: 5px 10px;
+		line-height:1.5;
+		height: 30px;
 		margin-right: 100px;
-		font-size: 15px;
-		font-style: inherit;
+		font-size: 12px;
+		margin:0;
+		font:inherit;
+		color:inherit;
+		width: 368px;
 	}
-	#et_expense:FOCUS,#div_heads input:FOCUS{
-		border: 3px solid activeborder;
-		border-radius:5px;
+	#et_expense:FOCUS,#div_form input:FOCUS{
+		border: 1px solid;
+		border-radius:4px;
 		float: inherit;
-		padding-left: 3px;
-		min-height: 30px;
-		font-size: 15px;
-		font-style: inherit;
+		padding: 5px 10px;
+		height: 30px;
+		font-size: 12px;
+		font: inherit;
+		border-color:rgba(250,167,34,.8);
+		-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(250,167,34,.6);
+		-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(250,167,34,.6);
+		box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(250,167,34,.6);
 	}
 	#btn_submit{
 		
@@ -58,6 +67,25 @@
 		font-size: 20px;
 		margin-left: 40px;
 	}
+	#div_form tr,#div_form td{
+		padding-bottom: 15px;
+		padding-top: 15px;
+		margin-bottom: 15px;
+	}
+	#div_form button{
+		background-color: #65CEA7;
+		border: 1px solid;
+		border-color: #3EC291;
+		border-radius: 4px;
+		color: #FFF;
+		display: inline-block;
+		font-family: "Open Sans", sans-serif;
+		font-size: 14px;
+		font-weight: 400;
+		padding: 6px 20px;
+		text-align: center;
+	}
+
 </style>
 <script type="text/javascript">
 	function saveexpense() {
@@ -74,27 +102,22 @@
 	</div>
 	
 	<div id="div_form">
-		<form action="saveexpense" method="get">
-			<div><label>Expense:</label><input name="expense" id="et_expense"/></div>
-			<div id="div_heads">
-				<label>Description</label><label>Cost</label>
-				<div>
-					<input id="input_item1_cause" name="item1name"/><input id="input_item1_cost" name="item1cost" value="0"/>
-				</div>
-				<div>
-					<input id="input_item2_cause" name="item2name"/><input id="input_item2_cost" name="item2cost" value="0"/>
-				</div>
-				<div>
-					<input id="input_item3_cause" name="item3name"/><input id="input_item3_cost" name="item3cost" value="0"/>
-				</div>
-				<div> 
-					<input id="input_item4_cause" name="item4name"/><input id="input_item4_cost" name="item4cost" value="0"/>
-				</div>
-				<div>
-					<button>Submit</button>
-				</div>
-			</div>
+	
+		<div><label>Date:${date}</label></div></br>
+		<form action="saveexpense" method="post">
+			<button>Save</button>
+			<table>
+				<div><tr><td><label>Expense:</label></td><td><input name="expense" id="et_expense" placeholder="Expense"/></td></tr></div>
+				<div><tr><td><label>Description:</label></td><td><input name="description" id="et_description" placeholder="Description"/></td></tr></div>
+				<div><tr><td><label>Cost:</label></td><td><input name="cost" id="et_cost" placeholder="Cost"/></td></tr></div>
+				<div><tr><td><label>Account:</label></td><td><input name="Account" id="et_account" placeholder="Account"/></td></tr></div>
+			</table>
+			
+			
 		</form>
+	</div>
+	<div class="row no-margin">
+					<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
 	</div>
 </body>
 </html>
