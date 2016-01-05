@@ -1,11 +1,15 @@
 package hames.core.dao;
 
+import hames.core.util.DatatableRequest;
+import hames.core.util.DatatableResponse;
+
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,6 +72,18 @@ public class AbstractDaoImpl implements AbstractDao {
 			getSession().close();
 		}
 		return t;
+	}
+
+	@Override
+	public DatatableResponse buildDatatable(DatatableRequest datatableRequest,Class clazz) {
+		getSession().beginTransaction();
+		
+		Long totalRecords = (Long) getSession().createCriteria(clazz).setProjection(Projections.rowCount()).uniqueResult();
+		
+		DatatableResponse datatableResponse = new DatatableResponse();
+		datatableResponse.setiTotalRecords(totalRecords);
+		
+		return datatableResponse;
 	}
 	
 }
